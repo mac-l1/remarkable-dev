@@ -15,7 +15,6 @@ This project intends to create a proper development environment for reMarkable
 - https://github.com/torwag/remarkableflash
 - https://plasma.ninja/blog/devices/remarkable/2017/12/18/reMarkable-exporation.html
 - https://github.com/ryzenlover/remarkable-mfgtools
-
 - http://www.davisr.me/projects/remarkable-microsd/
 
 ### tools

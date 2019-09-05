@@ -4,10 +4,12 @@
 qemu-system-arm \
   -M sabrelite \
   -bios "files/u-boot.imx" \
+  -initrd "initramfs.cpio.gz.uboot" \
   -kernel "zImage" \
   -append "console=ttymxc0 rootfstype=ext4 root=/dev/mmcblk1p2 rw rootwait init=/bin/bash loglevel=8 bootmem-debug earlyprintk" \
   -dtb "zero-gravitas.dtb" \
-  -drive file="floppy.img",format=raw,id=mmcblk1p2 -device sd-card,drive=mmcblk1p2
+  -drive file="floppy.img",format=raw,id=mmcblk1p2 \
+  -device sd-card,drive=mmcblk1p2
 
 # [    0.713093] 2020000.serial: ttymxc0 at MMIO 0x2020000 (irq = 19, base_baud = 5000000) is a IMX
 # [    0.732268] console [ttymxc0] enabled
