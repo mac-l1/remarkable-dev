@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  remarkable:
+    container_name: remarkable
+    image: remarkable
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - 80
+      - 22
