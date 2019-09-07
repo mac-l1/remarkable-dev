@@ -1,15 +1,18 @@
-#   -display gtk \
-#   -m 512M \
+#!/bin.sh
 
 qemu-system-arm \
   -M sabrelite \
-  -bios "files/u-boot.imx" \
-  -initrd "initramfs.cpio.gz.uboot" \
+  -m 512M \
+  -display gtk \
   -kernel "zImage" \
-  -append "console=ttymxc0 rootfstype=ext4 root=/dev/mmcblk1p2 rw rootwait init=/bin/bash loglevel=8 bootmem-debug earlyprintk" \
-  -dtb "zero-gravitas.dtb" \
-  -drive file="floppy.img",format=raw,id=mmcblk1p2 \
-  -device sd-card,drive=mmcblk1p2
+  -append "console=ttymxc0 rootfstype=ext4 root=/dev/mmcblk2 rw init=/sbin/init" \
+  -dtb "imx6q-sabresd.dtb" \
+  -drive file="rootfs.img",format=raw,id=mmcblk2 \
+  -device sd-card,drive=mmcblk2
+
+  # -dtb "zero-gravitas.dtb" \
+  # -initrd "initramfs.cpio.gz.uboot" \
+  # -bios "files/u-boot.imx" \
 
 # [    0.713093] 2020000.serial: ttymxc0 at MMIO 0x2020000 (irq = 19, base_baud = 5000000) is a IMX
 # [    0.732268] console [ttymxc0] enabled
@@ -52,9 +55,3 @@ qemu-system-arm \
 # Serial        : 123721d4ea9ce679
 
 # remarkable-mfgtools/Profiles/MX6SL Linux Update/OS Firmware/
-
-# qemu-system-arm \
-#   -drive file=yourfile.img,format=raw,id=mycard
-#   -device sd-card,drive=mycard
-#   -append "console=ttymxc0 rootfstype=ext4 root=/dev/mmcblk0p0 rw rootwait init=/sbin/init " \
-#   -dtb imx6dl-sabresd.dtb

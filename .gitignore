@@ -1,0 +1,5 @@
+remarkable-mfgtools
+buildroot
+*.dtb
+*.img
+zImage

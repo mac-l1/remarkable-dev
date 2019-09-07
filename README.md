@@ -2,6 +2,8 @@
 
 This project intends to create a proper development environment for reMarkable
 
+To prepare everything read and execute `./prepare.sh`, to start qemu run `./start.sh`
+
 ## resources
 
 ### official
@@ -34,18 +36,3 @@ This project intends to create a proper development environment for reMarkable
 #### creating Qemu machines
 
 - https://connect.ed-diamond.com/GNU-Linux-Magazine/GLMF-148/Qemu-comment-emuler-une-nouvelle-machine-Cas-de-l-APF27
-
-## research
-
-- download mfgtools
-- create a new image
-  - `dd if=/dev/zero of=floppy.img bs=1k count=1000000`
-  - `sudo losetup -fP floppy.img`
-  - `mkfs.ext4 floppy.img`
-- populate image
-  - `mkdir mnt`
-  - `sudo mount floppy.img ./mnt`
-  - decompress mfgtools' rootfs
-  - `cp -a` contents to the image
-- install qemu and arm dependencies
-- `./start.sh`
