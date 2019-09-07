@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# yay -S qemu qemu-arch-extra
+# yay -S qemu qemu-arch-extra cpio
 
 # cloning buildroot for vanilla kernel
 git clone https://github.com/buildroot/buildroot
 # cloning remarkable-mfgtools for rootfs
 git clone https://github.com/ryzenlover/remarkable-mfgtools
 
-# build i.MX6 vanilla kernel
+# building i.MX6 vanilla kernel (takes an hour)
 cd buildroot
 unset PERL_MM_OPT
 make imx6-sabresd_qt5_defconfig
@@ -34,4 +34,4 @@ cd ../../../../
 
 ln -s buildroot/output/build/linux-4.19.16/arch/arm/boot/zImage
 ln -s buildroot/output/build/linux-4.19.16/arch/arm/boot/dts/imx6q-sabresd.dtb
-ln -s remarkable-mfgtools/Profiles/MX6SL Linux Update/OS Firmware/files/rootfs.img
+ln -s "remarkable-mfgtools/Profiles/MX6SL Linux Update/OS Firmware/files/rootfs.img"
