@@ -1,4 +1,4 @@
-#!/bin.sh
+#!/bin/sh
 
 # yay -S qemu qemu-arch-extra
 
