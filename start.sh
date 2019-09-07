@@ -7,7 +7,7 @@ qemu-system-arm \
   -kernel "zImage" \
   -append "console=ttymxc0 rootfstype=ext4 root=/dev/mmcblk2 rw init=/sbin/init" \
   -dtb "zero-gravitas.dtb" \
-  -drive file="rootfs.img",format=raw,id=mmcblk2 \
+  -drive file="rootfs.img",format=raw,id=mmcblk2,cache=writethrough \
   -device sd-card,drive=mmcblk2
 
   # -dtb "zero-gravitas.dtb" \

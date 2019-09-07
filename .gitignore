@@ -3,3 +3,4 @@ buildroot
 *.dtb
 *.img
 zImage
+mnt

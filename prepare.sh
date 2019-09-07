@@ -16,22 +16,28 @@ cd -
 
 # extracting rootfs
 cd "remarkable-mfgtools/Profiles/MX6SL Linux Update/OS Firmware/files"
+rm -rf rootfs
 mkdir rootfs
-cp rootfs.tar.gz rootfs/
-cd rootfs
-tar -xvf rootfs.tar.gz
-rm rootfs.tar.gz
-cd ..
+tar -xvf rootfs.tar.gz -C rootfs
+rm -rf rootfs/home/root
+tar -xvf home.tgz -C rootfs/home
+
+# customizing rootfs
+rm rootfs/etc/fstab
+cp -a ../../../../../files/fstab rootfs/etc/fstab
+rm rootfs/etc/systemd/system/multi-user.target.wants/{dhcpcd.service,wpa_supplicant*}
 
 # creating rootfs.img
+rm rootfs.img
 dd if=/dev/zero of=rootfs.img bs=1M count=1024
 mkfs.ext4 -F -L linuxroot rootfs.img
 mkdir mnt
 sudo mount -o loop rootfs.img ./mnt
 sudo cp -a rootfs/* ./mnt
 sudo umount ./mnt
-cd ../../../../
+cd -
 
+rm zImage zero-gravitas.dtb rootfs.img
 ln -s buildroot/output/build/linux-4.19.16/arch/arm/boot/zImage
 ln -s buildroot/output/build/linux-4.19.16/arch/arm/boot/dts/imx6q-sabresd.dtb zero-gravitas.dtb
 ln -s "remarkable-mfgtools/Profiles/MX6SL Linux Update/OS Firmware/files/rootfs.img"
