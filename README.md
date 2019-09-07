@@ -18,6 +18,7 @@ To prepare everything read and execute `./prepare.sh`, to start qemu run `./star
 - https://plasma.ninja/blog/devices/remarkable/2017/12/18/reMarkable-exporation.html
 - https://github.com/ryzenlover/remarkable-mfgtools
 - http://www.davisr.me/projects/remarkable-microsd/
+- https://stackoverflow.com/questions/57811916/emulating-the-remarkable-tablet-i-mx6-armv7-with-qemu
 
 ### tools
 
@@ -32,6 +33,10 @@ To prepare everything read and execute `./prepare.sh`, to start qemu run `./star
 - https://azeria-labs.com/emulate-raspberry-pi-with-qemu/
 - https://raspberrypi.stackexchange.com/questions/165/emulation-on-a-linux-pc
 - https://github.com/wimvanderbauwhede/limited-systems/wiki/Raspbian-"stretch"-for-Raspberry-Pi-3-on-QEMU
+
+#### other
+
+- https://www.imx6rex.com/open-rex/software/how-to-add-support-for-for-different-board-model/
 
 #### creating Qemu machines
 

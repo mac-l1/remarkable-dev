@@ -33,5 +33,5 @@ sudo umount ./mnt
 cd ../../../../
 
 ln -s buildroot/output/build/linux-4.19.16/arch/arm/boot/zImage
-ln -s buildroot/output/build/linux-4.19.16/arch/arm/boot/dts/imx6q-sabresd.dtb
+ln -s buildroot/output/build/linux-4.19.16/arch/arm/boot/dts/imx6q-sabresd.dtb zero-gravitas.dtb
 ln -s "remarkable-mfgtools/Profiles/MX6SL Linux Update/OS Firmware/files/rootfs.img"

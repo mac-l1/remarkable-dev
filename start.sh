@@ -6,7 +6,7 @@ qemu-system-arm \
   -display gtk \
   -kernel "zImage" \
   -append "console=ttymxc0 rootfstype=ext4 root=/dev/mmcblk2 rw init=/sbin/init" \
-  -dtb "imx6q-sabresd.dtb" \
+  -dtb "zero-gravitas.dtb" \
   -drive file="rootfs.img",format=raw,id=mmcblk2 \
   -device sd-card,drive=mmcblk2
 
