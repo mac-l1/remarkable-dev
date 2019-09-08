@@ -8,7 +8,8 @@ qemu-system-arm \
   -append "console=ttymxc0 rootfstype=ext4 root=/dev/mmcblk2 rw init=/sbin/init" \
   -dtb "zero-gravitas.dtb" \
   -drive file="rootfs.img",format=raw,id=mmcblk2,cache=writethrough \
-  -device sd-card,drive=mmcblk2
+  -device sd-card,drive=mmcblk2 \
+  -nic user
 
   # -dtb "zero-gravitas.dtb" \
   # -initrd "initramfs.cpio.gz.uboot" \

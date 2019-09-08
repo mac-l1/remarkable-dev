@@ -4,6 +4,19 @@ This project intends to create a proper development environment for reMarkable
 
 To prepare everything read and execute `./prepare.sh`, to start qemu run `./start.sh`
 
+When the VM starts, login with `root`, then:
+
+```bash
+# because it fails and it triggers remarkable-fail which reboots
+systemctl stop xochitl
+systemctl disable xochitl
+# start network
+ifconfig eth0 up
+dhcpcd
+# install opkg
+sh entware_install.sh
+```
+
 ## resources
 
 ### official
@@ -37,6 +50,7 @@ To prepare everything read and execute `./prepare.sh`, to start qemu run `./star
 #### other
 
 - https://www.imx6rex.com/open-rex/software/how-to-add-support-for-for-different-board-model/
+- compile kernel for fb0: https://stackoverflow.com/questions/22066759/build-a-minimum-system-with-qt-embedded-and-run-on-qemu-for-x86
 
 #### creating Qemu machines
 
