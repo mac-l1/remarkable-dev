@@ -9,11 +9,17 @@ qemu-system-arm \
   -dtb "zero-gravitas.dtb" \
   -drive file="rootfs.img",format=raw,id=mmcblk2,cache=writethrough \
   -device sd-card,drive=mmcblk2 \
-  -nic user
+  -nic user \
+  -vnc 0.0.0.0:1
 
-  # -dtb "zero-gravitas.dtb" \
+  # -device bochs-display \
   # -initrd "initramfs.cpio.gz.uboot" \
   # -bios "files/u-boot.imx" \
+
+# [ TIME ] Timed out waiting for device dev-ttyGS0.device.
+# [DEPEND] Dependency failed for Serial Getty on ttyGS0.
+# [ TIME ] Timed out waiting for device sys-subsystem-net-devices-usb0.device.
+# [DEPEND] Dependency failed for udhcpd on usb0.
 
 # [    0.713093] 2020000.serial: ttymxc0 at MMIO 0x2020000 (irq = 19, base_baud = 5000000) is a IMX
 # [    0.732268] console [ttymxc0] enabled
