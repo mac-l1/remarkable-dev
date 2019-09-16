@@ -12,6 +12,23 @@ docker-compose --file docker/qtcreator/qt.docker-compose.yml up --build
 
 Make sure you've set up your ssh keys. 
 
+## Qemu
+
+To prepare everything read and execute `./prepare.sh`, to start qemu run `./start.sh`
+
+When the VM starts, login with `root`, then:
+
+```bash
+# because it fails and it triggers remarkable-fail which reboots
+systemctl stop xochitl
+systemctl disable xochitl
+# start network
+ifconfig eth0 up
+dhcpcd
+# install opkg
+sh entware_install.sh
+```
+
 ## resources
 
 ### official
@@ -26,6 +43,7 @@ Make sure you've set up your ssh keys.
 - https://plasma.ninja/blog/devices/remarkable/2017/12/18/reMarkable-exporation.html
 - https://github.com/ryzenlover/remarkable-mfgtools
 - http://www.davisr.me/projects/remarkable-microsd/
+- https://stackoverflow.com/questions/57811916/emulating-the-remarkable-tablet-i-mx6-armv7-with-qemu
 
 ### tools
 
@@ -41,21 +59,11 @@ Make sure you've set up your ssh keys.
 - https://raspberrypi.stackexchange.com/questions/165/emulation-on-a-linux-pc
 - https://github.com/wimvanderbauwhede/limited-systems/wiki/Raspbian-"stretch"-for-Raspberry-Pi-3-on-QEMU
 
+#### other
+
+- https://www.imx6rex.com/open-rex/software/how-to-add-support-for-for-different-board-model/
+- compile kernel for fb0: https://stackoverflow.com/questions/22066759/build-a-minimum-system-with-qt-embedded-and-run-on-qemu-for-x86
+
 #### creating Qemu machines
 
 - https://connect.ed-diamond.com/GNU-Linux-Magazine/GLMF-148/Qemu-comment-emuler-une-nouvelle-machine-Cas-de-l-APF27
-
-## research
-
-- download mfgtools
-- create a new image
-  - `dd if=/dev/zero of=floppy.img bs=1k count=1000000`
-  - `sudo losetup -fP floppy.img`
-  - `mkfs.ext4 floppy.img`
-- populate image
-  - `mkdir mnt`
-  - `sudo mount floppy.img ./mnt`
-  - decompress mfgtools' rootfs
-  - `cp -a` contents to the image
-- install qemu and arm dependencies
-- `./start.sh`
