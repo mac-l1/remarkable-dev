@@ -2,6 +2,16 @@
 
 This project intends to create a proper development environment for reMarkable
 
+## QtCreator in a docker
+
+To build and start the pre-set QtCreator image:
+
+```
+docker-compose --file docker/qtcreator/qt.docker-compose.yml up --build
+```
+
+Make sure you've set up your ssh keys. 
+
 ## resources
 
 ### official
