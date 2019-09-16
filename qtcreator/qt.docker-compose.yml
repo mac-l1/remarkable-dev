@@ -16,5 +16,5 @@ services:
       - ~/.Xauthority:/root/.Xauthority:rw
       # allow ssh access
       - ~/.ssh:/root/.ssh
-    # ssh key access
-    # user: 1000:1001
+      # directory to pass projects
+      - ./projects:/root/projects

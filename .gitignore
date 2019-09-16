@@ -5,4 +5,5 @@ qemu/*.img
 qemu/zImage
 qemu/mnt
 
-qtcreator/id_rsa
+qtcreator/projects/*
+!qtcreator/projects/.gitkeep
