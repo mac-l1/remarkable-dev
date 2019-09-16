@@ -15,9 +15,9 @@ RUN ./install-toolchain.sh -y \
   -d /opt/poky/2.1.3/
 
 RUN rm -rf .config
-COPY config .config
+COPY files/config .config
 
-RUN echo "source /opt/poky/2.1.3/environment-setup-cortexa9hf-neon-poky-linux-gnueabi" \
-  >> ~/.bashrc
+COPY files/start-qt.sh .
+RUN chmod +x ./start-qt.sh
 
-CMD [ "qtcreator" ]
+CMD ["./start-qt.sh"]
