@@ -50,9 +50,10 @@ mkdir mnt
 sudo mount -o loop rootfs.img ./mnt
 sudo cp -a rootfs/* ./mnt
 sudo umount ./mnt
+rm -rf ./mnt
 cd -
 
 rm zImage zero-gravitas.dtb rootfs.img
-ln -s buildroot/output/build/linux-4.19.16/arch/arm/boot/zImage
+ln -s buildroot/output/build/linux-4.19.16/arch/arm/boot/zImage .
 ln -s buildroot/output/build/linux-4.19.16/arch/arm/boot/dts/imx6q-sabresd.dtb zero-gravitas.dtb
-ln -s "remarkable-mfgtools/Profiles/MX6SL Linux Update/OS Firmware/files/rootfs.img"
+ln -s "remarkable-mfgtools/Profiles/MX6SL Linux Update/OS Firmware/files/rootfs.img" .

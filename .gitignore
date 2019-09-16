@@ -1,6 +1,6 @@
-remarkable-mfgtools
-buildroot
-*.dtb
-*.img
-zImage
-mnt
+*/remarkable-mfgtools
+*/buildroot
+*/*.dtb
+*/*.img
+*/zImage
+*/mnt
