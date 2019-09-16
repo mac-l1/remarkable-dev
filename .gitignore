@@ -1,6 +1,8 @@
-*/remarkable-mfgtools
-*/buildroot
-*/*.dtb
-*/*.img
-*/zImage
-*/mnt
+qemu/remarkable-mfgtools
+qemu/buildroot
+qemu/*.dtb
+qemu/*.img
+qemu/zImage
+qemu/mnt
+
+qtcreator/id_rsa

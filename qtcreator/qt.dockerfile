@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-WORKDIR /home/root
+WORKDIR /root
 
 RUN apt-get update
 RUN apt-get dist-upgrade -y
