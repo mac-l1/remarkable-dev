@@ -8,8 +8,8 @@
 #
 
 # local variables
-PKGDIR=ipkbuild
-BUILDDIR=build
+PKGDIR=pkg
+BUILDDIR=tmpbuild
 
 PROJECTS=$1
 TARGET=$2

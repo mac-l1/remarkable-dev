@@ -13,7 +13,7 @@ PROJECT=$3
 
 DOCKER=`which docker`
 
-TARGET=/root/projects/$FOLDER/$PROJECT
+TARGET=/root/projects/$FOLDER/src/$PROJECT
 BUILD=/root/projects/$FOLDER/build
 
 QMAKE=/opt/poky/2.1.3/sysroots/x86_64-pokysdk-linux/usr/bin/qt5/qmake

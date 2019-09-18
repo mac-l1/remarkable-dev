@@ -7,20 +7,21 @@ manifest = sys.argv[1]
 stream = open(manifest, 'r')
 manifest = yaml.safe_load(stream)
 
-try:
-    os.rmdir('ipkbuild')
-except:
-    pass
+print('cleaning previous package if existing')
+os.system('rm -r pkg')
 
-os.mkdir('ipkbuild')
-os.mkdir('ipkbuild/control')
-os.mkdir('ipkbuild/data')
+print('preparing structure')
+os.mkdir('pkg')
+os.mkdir('pkg/control')
+os.mkdir('pkg/data')
 
-debian_binary = open('ipkbuild/debian-binary', 'w+')
+print('writing debian-binary file')
+debian_binary = open('pkg/debian-binary', 'w+')
 debian_binary.write('2.0')
 debian_binary.close()
 
-control = open('ipkbuild/control/control', 'w+')
+print('writing control file')
+control = open('pkg/control/control', 'w+')
 content = f"""
 Package: {manifest['info']['package-name']}
 Version: {manifest['info']['version']}
@@ -35,12 +36,14 @@ def package_data(folder, path):
     for key in folder:
         if isinstance(folder[key], dict):
             new_path = path + f'{key}/'
+            print('creating directory', new_path)
             os.mkdir(new_path)
             package_data(folder[key], new_path)
         elif isinstance(folder[key], str):
+            print('installing file', folder[key])
             os.system(f'cp {folder[key]} {path + key}')
         else:
             # unhandled, should throw
             print(key, type(folder[key]))
 
-package_data(manifest['data'], 'ipkbuild/data/')
+package_data(manifest['data'], 'pkg/data/')

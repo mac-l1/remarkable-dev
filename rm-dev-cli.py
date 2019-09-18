@@ -10,76 +10,134 @@ paths = {
     }
 }
 
-@click.command()
-@click.argument('image')
-def docker(image):
-    """
-    Build the docker image for IMAGE. \n
-    Available images are: \n
-      - rm-qtcreator \n
-      - rm-emulated (soon)
-    """
-    p = subprocess.Popen(['docker-compose', 'build'], cwd=paths['docker'][image])
+#
+# functions
+#
+
+def docker_check():
+    return True
+
+def docker_build():
+    # p = subprocess.Popen(['docker-compose', 'build'], cwd=paths['docker'][image])
+    cwd = paths['docker']['rm-qtcreator']
+    p = subprocess.Popen(['docker-compose', 'build'], cwd=cwd)
     p.wait()
 
-@click.command()
-@click.argument('url')
-# @click.option('--name', default='', help='directory name of cloned repo')
 def clone(url):
-    """
-    Clones a reMarkable project at URL
-    """
-    p = subprocess.Popen(['git', 'clone', url], cwd=paths['projects'])
+    name = url.split('/').pop()
+    cwd = paths['projects'] + name
+    os.mkdir(cwd)
+    p = subprocess.Popen(['git', 'clone', url, 'src'], cwd=cwd)
     p.wait()
+    return name
 
-@click.command()
-@click.argument('project')
 def build(project):
-    """
-    Uses the rm-qtcreator container to build PROJECT as a reMarkable app
-    """
     # get the name of the project's *.pro file
-    p = subprocess.Popen(['find . -name *.pro'], shell=True, stdout=subprocess.PIPE, cwd=paths['projects']+project)
+    cwd = paths['projects'] + f'{project}/src'
+    p = subprocess.Popen(['find . -name *.pro'], shell=True, stdout=subprocess.PIPE, cwd=cwd)
     p.wait()
     out,err = p.communicate()
     pro_file = out.strip()
     # build
-    p = subprocess.Popen([paths['scripts'] + 'qt-build.sh', os.path.abspath(paths['projects']), project, pro_file])
+    script = paths['scripts'] + 'qt-build.sh'
+    path = os.path.abspath(paths['projects'])
+    p = subprocess.Popen([script, path, project, pro_file])
     p.wait()
 
-@click.command()
-@click.argument('project')
 def prepare(project):
+    script = os.path.abspath(paths['scripts']) + '/' + 'ipk-structure.py'
+    cwd = paths['projects'] + project
+    p = subprocess.Popen(['python', script, 'src/manifest.yml'], cwd=cwd)
+    p.wait()
+
+def package(project):
+    script = paths['scripts'] + 'make-ipkg.sh'
+    path = os.path.abspath(paths['projects'])
+    p = subprocess.Popen([script, path, project])
+    p.wait()
+
+def remove(project):
+    path = paths['projects'] + project
+    input(f'Press enter to ermanently delete {path} or ctrl+c to abort')
+    os.system(f'sudo rm -rf {path}')
+
+#
+# commands
+#
+
+@click.command(name='docker')
+# @click.argument('image')
+def docker_command():
+    # """
+    # Build the docker image for IMAGE. \n
+    # Available images are: \n
+    #   - rm-qtcreator \n
+    #   - rm-emulated (soon)
+    # """
+    return docker()
+
+@click.command(name='clone')
+@click.argument('url')
+# @click.option('--name', default='', help='directory name of cloned repo')
+def clone_command(url):
+    """
+    Clones a reMarkable project at URL
+    """
+    return clone(url)
+
+@click.command(name='build')
+@click.argument('project')
+def build_command(project):
+    """
+    Uses the rm-qtcreator container to build PROJECT as a reMarkable app
+    """
+    return build(project)
+
+@click.command(name='prepare')
+@click.argument('project')
+def prepare_command(project):
     """
     Prepares a built app to be packaged
     """
-    p = subprocess.Popen(['python', os.path.abspath(paths['scripts']) + '/' + 'ipk-structure.py', 'manifest.yml'], cwd=paths['projects']+project)
+    return prepare(project)
 
-@click.command()
+@click.command(name='package')
 @click.argument('project')
-def package(project):
+def package_command(project):
     """
     Packages a built app into a .ipk package
     """
-    p = subprocess.Popen([paths['scripts'] + 'make-ipkg.sh', os.path.abspath(paths['projects']), project])
+    return package(project)
 
 @click.command()
 @click.argument('url')
-def clone_package(url):
+def clonepackage(url):
     """
     Clones, builds, prepares and packages a project
     """
-    p = subprocess.Popen([paths['scripts'] + 'make-ipkg.sh', os.path.abspath(paths['projects']), project])
+    if docker_check() == False:
+        docker()
+    project = clone(url)
+    build(project)
+    prepare(project)
+    package(project)
+
+@click.command(name='remove')
+@click.argument('project')
+def remove_comand(project):
+    return remove(project)
 
 @click.group()
 def cli():
     pass
 
-cli.add_command(docker)
-cli.add_command(clone)
-cli.add_command(build)
-cli.add_command(prepare)
-cli.add_command(package)
+cli.add_command(docker_command)
+cli.add_command(clone_command)
+cli.add_command(build_command)
+cli.add_command(prepare_command)
+cli.add_command(package_command)
+cli.add_command(clonepackage)
+cli.add_command(remove_comand)
 
 if __name__ == '__main__':
     cli()
