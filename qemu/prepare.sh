@@ -2,12 +2,14 @@
 
 # yay -S qemu qemu-arch-extra cpio
 
-# Commented out to avoid recompiling manually compiled fb0 enabled kernel
 # # cloning buildroot for vanilla kernel
 # git clone https://github.com/buildroot/buildroot
 # # cloning remarkable-mfgtools for rootfs
 # git clone https://github.com/ryzenlover/remarkable-mfgtools
 
+# # Commented out to avoid recompiling manually compiled fb0 enabled kernel
+# # make linux-menuconfig
+# # Device drivers->Graphics support->Support for frame buffer devices->Cirrus Logic support
 # # building i.MX6 vanilla kernel (takes an hour)
 # cd buildroot
 # unset PERL_MM_OPT

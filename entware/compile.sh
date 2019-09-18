@@ -1,0 +1,1 @@
+# arm-linux-strip myexecutable
