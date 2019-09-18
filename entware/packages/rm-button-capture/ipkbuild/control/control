@@ -1,6 +1,0 @@
-Package: rm-button-capture
-Version: 1.0
-Architecture: armv7-3.2
-Maintainer: pierre-alexis@ciavaldini.fr
-Description: A simple program to capture gpio button input on the reMarkable.
-Priority: optional
