@@ -5,8 +5,7 @@ qemu/*.img
 qemu/zImage
 qemu/mnt
 
-qtcreator/projects/*
-!qtcreator/projects/.gitkeep
+projects/*
+!projects/.gitkeep
 
-entware/packages/*
-!entware/packages/.gitkeep
+docs

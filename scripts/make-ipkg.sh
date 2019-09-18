@@ -10,9 +10,9 @@
 # local variables
 PKGDIR=ipkbuild
 BUILDDIR=build
-PROJECTS=packages
 
-TARGET=$1
+PROJECTS=$1
+TARGET=$2
 
 # TODO check existence and structure
 echo "making package $TARGET..."

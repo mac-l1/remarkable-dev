@@ -7,11 +7,11 @@
 # the compiled binary is found in <folder>/build
 #
 
-FOLDER=$1
-PROJECT=$2
+HOST_PROJECTS=$1
+FOLDER=$2
+PROJECT=$3
 
 DOCKER=`which docker`
-HOST_PROJECTS=`pwd`/projects
 
 TARGET=/root/projects/$FOLDER/$PROJECT
 BUILD=/root/projects/$FOLDER/build
