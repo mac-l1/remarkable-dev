@@ -7,3 +7,6 @@ qemu/mnt
 
 qtcreator/projects/*
 !qtcreator/projects/.gitkeep
+
+entware/packages/*
+!entware/packages/.gitkeep
