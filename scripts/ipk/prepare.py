@@ -32,7 +32,7 @@ Description: {manifest['info']['description']}
 Priority: optional
 """
 
-if manifest['info']['depends']:
+if 'depends' in manifest['info']:
     content += f"Depends: {manifest['info']['depends']}"
 
 control.write(content)

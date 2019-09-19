@@ -74,6 +74,15 @@ def remove(project):
     input(f'Press enter to ermanently delete {path} or ctrl+c to abort')
     os.system(f'sudo rm -rf {path}')
 
+def upload(project):
+    # temporary function to be replaced by an upload to the proper repo
+    cwd = paths['projects'] + project
+    p = subprocess.Popen(['find . -name *.ipk'], shell=True, stdout=subprocess.PIPE, cwd=cwd)
+    p.wait()
+    out,err = p.communicate()
+    package = out.strip().decode('UTF-8')
+    os.system(f'sudo mv {cwd}/{package} ./docker/opkg/html/snapshots')
+
 #
 # commands
 #
@@ -137,8 +146,16 @@ def clonepackage(url):
 
 @click.command(name='remove')
 @click.argument('project')
-def remove_comand(project):
+def remove_command(project):
     return remove(project)
+
+@click.command(name='upload')
+@click.argument('project')
+def upload_command(project):
+    """
+    Uploads a package to the repository
+    """
+    return upload(project)
 
 @click.group()
 def cli():
@@ -150,7 +167,8 @@ cli.add_command(build_command)
 cli.add_command(prepare_command)
 cli.add_command(package_command)
 cli.add_command(clonepackage)
-cli.add_command(remove_comand)
+cli.add_command(remove_command)
+cli.add_command(upload_command)
 
 if __name__ == '__main__':
     cli()
