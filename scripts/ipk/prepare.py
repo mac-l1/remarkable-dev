@@ -1,5 +1,6 @@
 import sys
 import os
+# TODO dirtily symlinked
 import parse
 
 manifest = sys.argv[1]
@@ -22,7 +23,7 @@ debian_binary.close()
 
 print('writing control file')
 control = open('pkg/control/control', 'w+')
-content = f"""
+content = f"""\
 Package: {manifest['info']['package-name']}
 Version: {manifest['info']['version']}
 Architecture: armv7-3.2

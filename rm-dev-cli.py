@@ -13,11 +13,15 @@ paths = {
 }
 
 #
-# functions
+# helpers
 #
 
 def docker_check():
     return True
+
+#
+# functions
+#
 
 def docker_build():
     # p = subprocess.Popen(['docker-compose', 'build'], cwd=paths['docker'][image])
@@ -53,15 +57,14 @@ def prepare(project):
     p.wait()
     out,err = p.communicate()
     manifest = out.strip().decode('UTF-8')
-    print(manifest)
     # structure package
     cwd = paths['projects'] + project
-    script = os.path.abspath(paths['scripts']) + '/ipk-structure.py'
+    script = os.path.abspath(paths['scripts']) + '/ipk/prepare.py'
     p = subprocess.Popen(['python', script, f'src/{manifest}'], cwd=cwd)
     p.wait()
 
 def package(project):
-    script = paths['scripts'] + 'make-ipkg.sh'
+    script = paths['scripts'] + '/ipk/package.sh'
     path = os.path.abspath(paths['projects'])
     p = subprocess.Popen([script, path, project])
     p.wait()

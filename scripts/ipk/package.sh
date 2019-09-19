@@ -20,7 +20,8 @@ cd $PROJECTS/$TARGET
 
 VERSION=`cat $PKGDIR/control/control | grep Version | cut -d' ' -f2`
 ARCH=`cat $PKGDIR/control/control | grep Architecture | cut -d' ' -f2`
-PACKAGE=${TARGET}_${VERSION}_${ARCH}.ipk
+NAME=`cat $PKGDIR/control/control | grep Package | cut -d' ' -f2`
+PACKAGE=${NAME}_${VERSION}_${ARCH}.ipk
 
 echo "removing previous package..."
 rm $PACKAGE

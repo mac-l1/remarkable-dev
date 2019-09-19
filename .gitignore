@@ -9,3 +9,4 @@ projects/*
 !projects/.gitkeep
 
 docs
+**/__pycache__
