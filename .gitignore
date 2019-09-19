@@ -10,3 +10,6 @@ projects/*
 
 docs
 **/__pycache__
+
+docker/opkg/html/snapshots/*
+!docker/opkg/html/snapshots/.gitkeep
