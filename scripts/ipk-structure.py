@@ -1,11 +1,11 @@
 import sys
 import os
-import yaml
+import parse
 
 manifest = sys.argv[1]
-
-stream = open(manifest, 'r')
-manifest = yaml.safe_load(stream)
+ext = manifest.split('.').pop()
+stream = open(manifest, 'r').read()
+manifest = parse.parse(stream, ext)
 
 print('cleaning previous package if existing')
 os.system('rm -r pkg')

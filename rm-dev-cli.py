@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import click
 import subprocess
 import os
@@ -45,9 +47,17 @@ def build(project):
     p.wait()
 
 def prepare(project):
-    script = os.path.abspath(paths['scripts']) + '/' + 'ipk-structure.py'
+    # find manifest
+    cwd = paths['projects'] + project + '/src'
+    p = subprocess.Popen(['find . -name package-manifest.*'], shell=True, stdout=subprocess.PIPE, cwd=cwd)
+    p.wait()
+    out,err = p.communicate()
+    manifest = out.strip().decode('UTF-8')
+    print(manifest)
+    # structure package
     cwd = paths['projects'] + project
-    p = subprocess.Popen(['python', script, 'src/manifest.yml'], cwd=cwd)
+    script = os.path.abspath(paths['scripts']) + '/ipk-structure.py'
+    p = subprocess.Popen(['python', script, f'src/{manifest}'], cwd=cwd)
     p.wait()
 
 def package(project):
