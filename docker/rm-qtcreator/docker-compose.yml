@@ -17,4 +17,4 @@ services:
       # allow ssh access
       - ~/.ssh:/root/.ssh
       # directory to pass projects
-      - ./projects:/root/projects
+      - ../../projects:/root/projects

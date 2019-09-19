@@ -31,6 +31,10 @@ Maintainer: {manifest['info']['maintainer']}
 Description: {manifest['info']['description']}
 Priority: optional
 """
+
+if manifest['info']['depends']:
+    content += f"Depends: {manifest['info']['depends']}"
+
 control.write(content)
 
 def package_data(folder, path):
@@ -42,7 +46,7 @@ def package_data(folder, path):
             package_data(folder[key], new_path)
         elif isinstance(folder[key], str):
             print('installing file', folder[key])
-            os.system(f'cp {folder[key]} {path + key}')
+            os.system(f'cp -r {folder[key]} {path + key}')
         else:
             # unhandled, should throw
             print(key, type(folder[key]))
