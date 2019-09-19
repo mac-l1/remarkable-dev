@@ -13,8 +13,12 @@ WORKDIR /root/opkg-utils
 RUN make
 RUN make install
 
+WORKDIR /usr/share/nginx/html/snapshots
+
 # enable website
 RUN rm /etc/nginx/conf.d/default.conf
 COPY files/snapshots /etc/nginx/conf.d/snapshots.conf
 
-ENTRYPOINT [ "bash", "-c", "chown -R www-data:www-data /usr/share/nginx/html && nginx-debug -g 'daemon off;'" ]
+COPY files/entrypoint.sh /root/entrypoint.sh
+
+ENTRYPOINT [ "/root/entrypoint.sh" ]
