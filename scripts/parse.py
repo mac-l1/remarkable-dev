@@ -11,8 +11,6 @@ def parse_cson(stream):
     return cson.loads(stream)
 
 def parse(stream, ext):
-    print(stream)
-    print(ext)
     if ext in ['yaml', 'yml']:
         return parse_yaml(stream)
     elif ext == 'cson':
